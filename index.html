@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Charmonman:wght@400;700&family=Meow+Script&family=Ms+Madi&family=Rouge+Script&display=swap" rel="stylesheet">
+
+    <title>2 aninhos</title>
+    <style>
+        
+        body {
+
+            background-color: #2C003E;
+
+        }
+
+        .slide-container {
+            background-color: rgba(255, 255, 255, 0.1);
+            width: 100%;
+            height: 90vh;
+            overflow: hidden;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        .slide {
+
+            position: absolute;
+            width: 80%;
+            max-width: 800px;
+            opacity: 0;
+            transition: opacity 0.8s ease-in-out;
+            
+        }
+
+        .slide img {
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            border-radius: 20%;
+            width: 700px;
+            height: auto;
+            object-fit: cover;
+
+        }
+
+        .slide.active {
+
+            opacity: 1;
+
+        }
+
+        /* Texto abaixo do slide */
+        .slide-text {
+
+            font-family: "Meow Script", cursive;
+            font-size: 2em;
+            color: #FFB6C1 ;
+            padding-inline: 20%;
+
+        }
+
+        /* Centralização e estilo do contador */
+        #contador {
+
+            font-family: "Meow Script", cursive;
+            color: #FFB6C1 ;
+            font-size: 4em;
+            font-weight: bold;
+            text-align: center;
+            margin: 20px 0;
+            
+        }
+
+        /* Animação do coração */
+        @keyframes explode {
+            0% {
+                transform: scale(1) translate(-50%, -50%);
+                opacity: 0.8;
+            }
+            25% {
+                transform: translateY(-20px) scale(1);
+                opacity: 1;
+            }
+            50% {
+                transform: translateY(-30px) scale(1);
+                opacity: 1;
+            }
+            75% {
+                transform: translateY(-40px) scale(1);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-50px) scale(1);
+                opacity: 0;
+            }
+        }
+
+        /* Estilo para o coração */
+        .heart {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background-color: transparent;
+            animation: explode 1s ease-out forwards;
+        }
+
+        /* Parte superior do coração (antes) */
+        .heart::before, .heart::after {
+            content: '';
+            position: absolute;
+            width: 25px;
+            height: 40px;
+            background-color: #FF69B4; /* Cor do coração */
+            border-radius: 50px 50px 0 0;
+        }
+
+        /* Parte esquerda do coração */
+        .heart::before {
+            left: -25px;
+            top: 0;
+            transform: rotate(-45deg); /* Rotação para o lado esquerdo */
+        }
+
+        /* Parte direita do coração */
+        .heart::after {
+            right: 0;
+            top: 0;
+            transform: rotate(45deg); /* Rotação para o lado direito */
+        }
+
+        
+    </style>
+</head>
+<body>
+    <!--  Campo de slide -->
+    <div class="slide-container">
+
+        <div class="slide active"><img src="imagens/IMG_20240707_211614.jpg" alt="Slide 1"></div>
+        <div class="slide"><img src="imagens/IMG_20240707_212222.jpg" alt="Slide 2"></div>
+        <div class="slide"><img src="imagens/IMG_20240818_183711_706.webp" alt="Slide 3"></div>
+        <div class="slide"><img src="imagens/IMG_20240828_230504_683.jpg" alt="Slide 4"></div>
+        <div class="slide"><img src="imagens/IMG_20230122_224840.jpg" alt="Slide 5"></div>
+        <div class="slide"><img src="imagens/IMG_20230207_084928.jpg" alt="Slide 6"></div>
+        <div class="slide"><img src="imagens/IMG_20230402_175933_825.webp" alt="Slide 7"></div>
+        <div class="slide"><img src="imagens/IMG_20230206_201418.jpg" alt="Slide 8"></div>
+
+    </div>
+
+    <!-- Contador de tempo passado desde a data específica -->
+    <div id="contador">Carregando contador...</div>
+
+    <!-- Texto abaixo do slide -->
+    <div class="slide-text">
+        <p>A pessoa mais importante da minha vida, quem eu não esperava, foi uma surpresa de diversas formas, arrisquei tudo para estar com você, você arriscou tudo para estar comigo.</p>
+        <p>Agora estamos já a 2 anos juntos, desde o início compartilhando sonhos, cada vez maiores, muito comprometimento um com o outro, apesar de cada desentendida, erros e deslizes, a cada dia surge mais sentimento, mais conforto, sonhos e desejos sobre um futuro juntos.</p>
+        <p>Aconteça o que for, darei meu melhor para deixar o sentimento mais e mais forte, o carinho mais acolhedor possível, a compreensão maior.</p>
+        <p>Eu te amo acima de tudo, parabéns a nós bb.</p>
+    </div>
+    
+
+    <script>
+        // Lógica para rotação automática dos slides
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const slideInterval = 4000; // Intervalo de 3 segundos
+
+        function showNextSlide() {
+            slides[currentSlide].classList.remove('active');
+            currentSlide = (currentSlide + 1) % slides.length;
+            slides[currentSlide].classList.add('active');
+        }
+
+        setInterval(showNextSlide, slideInterval);
+
+        // Contador de tempo passado desde uma data específica
+        const startDate = new Date("2022-11-12T20:00:00"); // Defina a data desejada aqui
+
+    function updateCounter() {
+        const now = new Date();
+        const diff = now - startDate;
+
+        const years = Math.floor(diff / (1000 * 60 * 60 * 24 * 365));
+        const days = Math.floor((diff % (1000 * 60 * 60 * 24 * 365)) / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+        document.getElementById('contador').textContent = 
+            `Tempo juntos: ${years} anos, ${days} dias, ${hours} horas`;
+    }
+
+    setInterval(updateCounter, 1000); // Atualiza o contador a cada segundo
+
+
+       
+    // Função para criar e animar o coração em uma posição aleatória
+    function criarCoracao() {
+            const heart = document.createElement('div');
+            heart.classList.add('heart');
+
+            // Definir uma posição aleatória na tela
+            const randomX = Math.random() * window.innerWidth;
+            const randomY = Math.random() * window.innerHeight;
+
+            // Aplicar a posição aleatória no estilo
+            heart.style.left = `${randomX}px`;
+            heart.style.top = `${randomY}px`;
+
+            document.body.appendChild(heart);
+
+            // Remover o coração após a animação para evitar acumulação de elementos
+            setTimeout(() => {
+                heart.remove();
+            }, 2000);  // 2000ms é o tempo da animação
+        }
+
+        // Criar o coração a cada 1 segundo
+        setInterval(criarCoracao, 100);
+
+    </script>
+
+</body>
+</html>
